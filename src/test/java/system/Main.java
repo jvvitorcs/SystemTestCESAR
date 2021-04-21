@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import system.helpers.DriverManager;
@@ -57,5 +58,29 @@ public class Main {
 
         driver = DriverManager.getDriver();
         driver.get("https://store.steampowered.com/");
+    }
+
+    @Test
+    @Disabled
+    void atividade21() throws InterruptedException{
+        driver = DriverManager.getDriver();
+        driver.get("http://automationpractice.com/index.php");
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        Actions actions = new Actions(driver);
+
+        WebElement womenMenu = driver.findElement(By.cssSelector("#block_top_menu a[title='Women']"));
+        By elementNotVisibleSelector = By.cssSelector("#block_top_menu .submenu-container");
+
+        try {
+            System.out.println(driver.findElement(elementNotVisibleSelector).isDisplayed());
+            actions.moveToElement(womenMenu).build().perform();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(elementNotVisibleSelector));
+            System.out.println(driver.findElement(elementNotVisibleSelector).isDisplayed());
+        } catch (Exception e) {
+            System.out.println("EXCEPTION: " + e.getClass());
+        }
+
+        Thread.sleep(2000);
+        DriverManager.endSession();
     }
 }

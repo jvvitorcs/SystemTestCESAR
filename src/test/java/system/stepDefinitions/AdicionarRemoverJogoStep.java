@@ -5,6 +5,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import system.helpers.DriverManager;
+import system.pages.CartPage;
+import system.pages.GamePage;
 import system.pages.MainPage;
 import system.pages.StoreNav;
 
@@ -12,6 +14,8 @@ public class AdicionarRemoverJogoStep {
 
     MainPage mainPage = new MainPage();
     StoreNav storeNav = new StoreNav();
+    CartPage cartpage = new CartPage();
+    GamePage gamePage = new GamePage();
 
     @Before
     public void Start(){ mainPage.acessarPagina(); }
@@ -27,27 +31,26 @@ public class AdicionarRemoverJogoStep {
     @When("o usuário clicar para adicionar o jogo ao carrinho")
     public void ClickAddGame() {
 
-        storeNav.AddToCart();
+        gamePage.AddToCart();
     }
     @Then("a lista de jogos no carrinho é atualizada!\"")
     public void SeeTheCart() {
-        storeNav.CheckMessage();
+        cartpage.CheckMessage();
 
     }
     @When("o usuário clicar para remover o\\(s) jogo\\(s)")
     public void RemoveGame() {
-        storeNav.RemoveTheGame();
+        cartpage.RemoveTheGame();
     }
     @Then("a lista de jogos no carrinho fica vazia!\"")
     public void EmptyCart() {
 
-        storeNav.CheckCartValue();
+        cartpage.CheckCartValue();
     }
 
     @After
-    public void End(){
-        DriverManager.endSession();
+    public void End() {
+        mainPage.Finalizar();
     }
-
 
 }

@@ -27,22 +27,6 @@ public class StoreNav {
     private By firstItemList = By.cssSelector(".match");
     private By newAreaButton = By.cssSelector(".left-column > div:nth-child(2)");
 
-
-    //Game Page
-    private By gamePage = By.cssSelector(".page_content_ctn");
-    private By purchaseArea = By.id("#game_area_purchase");
-    private By btnAddCart = By.cssSelector("#game_area_purchase .btn_green_steamui");
-
-    //Cart Page
-    private  By cartPage = By.cssSelector(".responsive_page_template_content");
-    private  By addedMessage = By.cssSelector(".cart_status_message");
-    private By itemCartList = By.cssSelector(".cart_item_list");
-    private By lastItemCart = By.cssSelector(".cart_item_list > div:last-child");
-    private By btnRemoveGame = By.cssSelector(".cart_item_list > div:last-child .remove_link");
-    private By cartValue = By.cssSelector(".checkout_content.cart #cart_estimated_total");
-
-
-
     public StoreNav() {
         this.driver = DriverManager.getDriver();
         this.wait = DriverManager.getDriverWait();
@@ -64,27 +48,6 @@ public class StoreNav {
         WebElement FirstItemList = wait.until(ExpectedConditions.elementToBeClickable(firstItemList));
         FirstItemList.click();
     }
-
-    public void AddToCart(){
-        WebElement BtnAddCart = wait.until(ExpectedConditions.elementToBeClickable(btnAddCart));
-        BtnAddCart.click();
-    }
-
-    public void CheckMessage(){
-        WebElement AddMessage = driver.findElement(addedMessage);
-        assertEquals("ITEM ADICIONADO!", AddMessage.getText(), "OK!");
-    }
-
-    public void RemoveTheGame(){
-        WebElement BtnRemoveGame = wait.until(ExpectedConditions.elementToBeClickable(btnRemoveGame));
-        BtnRemoveGame.click();
-    }
-
-    public void CheckCartValue(){
-        WebElement CartValue = driver.findElement(cartValue);
-        assertEquals("R$ 0,00", CartValue.getText(), "OK!");
-    }
-
 
     //clase: .labs-content filho: .left-column segundo filho: .capsule botão: .experiment-button
 }

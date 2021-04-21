@@ -21,7 +21,11 @@ public class MainPage {
 
     public void acessarPagina(){
         driver.get(MAIN_PAGE);
-        driver.manage().window().fullscreen();
+        //driver.manage().window().fullscreen();
+    }
+
+    public void Finalizar() {
+        DriverManager.endSession();
     }
 
 
