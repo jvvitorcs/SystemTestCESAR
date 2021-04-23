@@ -27,17 +27,16 @@ public class AcessarSiteEmBreveStep {
     }
     @When("surgir a mensagem alertando a mudança de site")
     public void AlertMessage() {
-        System.out.println("Carregou");
-        //leftMenu.CheckMessageWarning();
+        leftMenu.CheckMessageWarning();
     }
 
     @When("o usuário clicar em Continuar")
-    public void ContinueButton()  {
-
+    public void ContinueButton() {
         leftMenu.ClickButtonContinue();
     }
     @Then("ele é encaminhado para o site!\"")
-    public void OficialSite() {
+    public void OficialSite() throws Exception {
+        leftMenu.takeSnapShot();
         System.out.println("O site Carregou");
     }
 }

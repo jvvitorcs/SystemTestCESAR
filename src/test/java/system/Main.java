@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import system.helpers.DriverManager;
 import system.pages.MainPage;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,13 +22,15 @@ public class Main {
     private WebDriver driver;
     private WebDriverWait wait;
 
+
     @Test
     @Disabled
-    void TesteEntrarNoSite()  {
+    void TesteEntrarNoSite() {
         // GIVEN
         driver = DriverManager.getDriver();
         wait = DriverManager.getDriverWait();
-        driver.get("https://steamcommunity.com/linkfilter/?url=http://dyinglightgame.com/?utm_source=Steam&amp;utm_medium=Link&amp;utm_campaign=Dying_Light_2");
+        //driver.get("https://steamcommunity.com/linkfilter/?url=http://dyinglightgame.com/?utm_source=Steam&amp;utm_medium=Link&amp;utm_campaign=Dying_Light_2");
+        driver.get("https://store.steampowered.com/");
         //WebElement StoreNav = driver.findElement(By.cssSelector(".store_nav"));
         //WeElement SearchBoxInput = StoreNav.findElement(By.id("store_nav_search_term"));
         //WebElement buttonSoon = driver.findElement(By.cssSelector(".home_page_gutter  div:nth-child(8) > a:nth-child(3)"));
@@ -43,13 +47,39 @@ public class Main {
         assertEquals("Grand Theft Auto V", GameName.getText(), "O Jogo está correto");
 */
         //buttonSoon.click();
-        WebElement WarningPanelText = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".warningPanel.friendlyInterstital h2")));
-        assertEquals("Você está saindo de um site do Steam.", WarningPanelText.getText(), "OK!");
-        WebElement ProceedButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#proceedButton")));
-        ProceedButton.click();
 
-        // FINALLY
-        //DriverManager.endSession();
+
+        WebElement ButtonSoon = driver.findElement(By.cssSelector(".home_page_gutter  div:nth-child(8) > a:nth-child(3)"));
+        ButtonSoon.click();
+        WebElement SliderItem = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".store_horizontal_autoslider_ctn a")));
+        SliderItem.click();
+        WebElement SiteButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".block.responsive_apppage_details_left.game_details div:nth-child(2) a:nth-child(2)")));
+        SiteButton.click();
+        String currentwindow = driver.getWindowHandle();
+        Set<String> allWindows = driver.getWindowHandles();
+        Iterator<String> i = allWindows.iterator();
+        while (i.hasNext()) {
+            String childwindow = i.next();
+            if (!childwindow.equalsIgnoreCase(currentwindow)) {
+                driver.switchTo().window(childwindow);
+                WebElement WarningPanelText = driver.findElement(By.cssSelector(".warningPanel.friendlyInterstital h2"));
+                assertEquals("Você está saindo de um site do Steam.", WarningPanelText.getText(), "OK!");
+                WebElement ProceedButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#proceedButton")));
+                ProceedButton.click();
+
+            }  else {
+            System.out.println("There are no children");
+        }
+
+
+            //WebElement WarningPanelText = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".warningPanel.friendlyInterstital h2")));
+            // assertEquals("Você está saindo de um site do Steam.", WarningPanelText.getText(), "OK!");
+            //WebElement ProceedButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#proceedButton")));
+            //ProceedButton.click();
+
+            // FINALLY
+            //DriverManager.endSession();
+        }
     }
 
     @Test
@@ -60,27 +90,5 @@ public class Main {
         driver.get("https://store.steampowered.com/");
     }
 
-    @Test
-    @Disabled
-    void atividade21() throws InterruptedException{
-        driver = DriverManager.getDriver();
-        driver.get("http://automationpractice.com/index.php");
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        Actions actions = new Actions(driver);
 
-        WebElement womenMenu = driver.findElement(By.cssSelector("#block_top_menu a[title='Women']"));
-        By elementNotVisibleSelector = By.cssSelector("#block_top_menu .submenu-container");
-
-        try {
-            System.out.println(driver.findElement(elementNotVisibleSelector).isDisplayed());
-            actions.moveToElement(womenMenu).build().perform();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(elementNotVisibleSelector));
-            System.out.println(driver.findElement(elementNotVisibleSelector).isDisplayed());
-        } catch (Exception e) {
-            System.out.println("EXCEPTION: " + e.getClass());
-        }
-
-        Thread.sleep(2000);
-        DriverManager.endSession();
-    }
 }

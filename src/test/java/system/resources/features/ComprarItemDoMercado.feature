@@ -1,6 +1,6 @@
 #language: en
 
-@ts2020 @Mercado @ComprarItem
+@ts2021 @Mercado @ComprarItem
 Feature: Comprar Item no Mercado
   Como usuário do aplicativo
   Quando eu clicar do Botão Mecado no Submenu de Comunidade

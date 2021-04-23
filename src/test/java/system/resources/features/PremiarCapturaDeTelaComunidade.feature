@@ -1,6 +1,6 @@
 #language: en
 
-@ts2020 @Comunidade @PremiarCaptura
+@ts @Comunidade @PremiarCaptura
 Feature: Premiar Captura de Tela da Comunidade
   Como usuário do aplicativo
   Quando eu clicar do Botão da Comunidade

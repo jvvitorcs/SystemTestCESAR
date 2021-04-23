@@ -1,6 +1,6 @@
 #language: en
 
-@ts2020 @JogoEmBreve @OutroSite
+@ts2021 @JogoEmBreve @OutroSite
 Feature: Entrar no site de um dos jogos listado no "Em Breve"
   Como usuário do aplicativo
   Quando eu entrar na opção "Em breve"

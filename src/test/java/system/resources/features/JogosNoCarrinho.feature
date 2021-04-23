@@ -1,6 +1,6 @@
 #language: en
 
-@ts2020 @ComprarJogos @Carrinho
+@ts2021 @ComprarJogos @Carrinho
 Feature: Procurar jogos e colocar no carrinho
   Como usuário do aplicativo
   Quando eu pesquisar na caixa de pesquisa

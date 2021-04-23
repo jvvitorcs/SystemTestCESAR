@@ -1,12 +1,18 @@
 package system.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import system.helpers.DriverManager;
-import java.util.concurrent.TimeUnit;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+
+import java.util.Iterator;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +49,7 @@ public class LeftMenu {
     }
 
     public void ClickItemSlider(){
-        WebElement SliderItem = wait.until(ExpectedConditions.elementToBeClickable(sliderItemButton));
+        WebElement SliderItem = wait.until(ExpectedConditions.presenceOfElementLocated(sliderItemButton));
         SliderItem.click();
     }
 
@@ -52,20 +58,34 @@ public class LeftMenu {
         SiteButton.click();
     }
 
-    public void CheckMessageWarning(){
-        //WebElement WarningPanelText = driver.findElement(warningPanelText);
-        WebElement WarningPanelText = wait.until(ExpectedConditions.presenceOfElementLocated(warningPanelText));
-        assertEquals("Você está saindo de um site do Steam.", WarningPanelText.getText(), "OK!");
+    public void CheckMessageWarning() {
+        String currentwindow = driver.getWindowHandle();
+        Set<String> allWindows = driver.getWindowHandles();
+        Iterator<String> i = allWindows.iterator();
+        while (i.hasNext()) {
+            String childwindow = i.next();
+            if (!childwindow.equalsIgnoreCase(currentwindow)) {
+                driver.switchTo().window(childwindow);
+                WebElement WarningPanelText = driver.findElement(By.cssSelector(".warningPanel.friendlyInterstital h2"));
+                assertEquals("Você está saindo de um site do Steam.", WarningPanelText.getText(), "OK!");
+
+            }
+        }
     }
 
+
     public void ClickButtonContinue() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebElement ProceedButton =  wait.until(ExpectedConditions.elementToBeClickable(proceedButton));
-        //WebElement ProceedButton = driver.findElement(proceedButton);
         ProceedButton.click();
     }
 
-    public void LoadSite(){
+    public void takeSnapShot() throws Exception{
+
+        TakesScreenshot scrShot =((TakesScreenshot)driver);
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(SrcFile, new File("c:\\tmp\\screenshot.png"));
 
     }
+
 }
+
