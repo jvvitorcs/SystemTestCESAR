@@ -17,10 +17,14 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//****** O Main foi usado apenas para testar funcionalidades e seletores *******//
+
 public class Main {
 
     private WebDriver driver;
     private WebDriverWait wait;
+
+    MainPage mainPage = new MainPage();
 
 
     @Test
@@ -85,10 +89,11 @@ public class Main {
     @Test
     @Disabled
     void TesteEntrarNoSite2() {
-
         driver = DriverManager.getDriver();
         driver.get("https://store.steampowered.com/");
-    }
 
+        mainPage.loginConta();
+    }
+    //****** O Main foi usado apenas para testar funcionalidades e seletores *******//
 
 }

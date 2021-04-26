@@ -4,7 +4,6 @@ package system.stepDefinitions;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
-import system.helpers.DriverManager;
 import system.pages.CartPage;
 import system.pages.GamePage;
 import system.pages.MainPage;
@@ -34,8 +33,9 @@ public class AdicionarRemoverJogoStep {
         gamePage.AddToCart();
     }
     @Then("a lista de jogos no carrinho é atualizada!\"")
-    public void SeeTheCart() {
+    public void SeeTheCart() throws Exception {
         cartpage.CheckMessage();
+        cartpage.TakeSnapShot();
 
     }
     @When("o usuário clicar para remover o\\(s) jogo\\(s)")
@@ -43,9 +43,10 @@ public class AdicionarRemoverJogoStep {
         cartpage.RemoveTheGame();
     }
     @Then("a lista de jogos no carrinho fica vazia!\"")
-    public void EmptyCart() {
+    public void EmptyCart() throws Exception {
 
         cartpage.CheckCartValue();
+        cartpage.TakeSnapShot2();
     }
 
     @After

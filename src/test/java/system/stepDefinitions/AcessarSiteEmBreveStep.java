@@ -1,5 +1,6 @@
 package system.stepDefinitions;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import system.pages.LeftMenu;
@@ -36,7 +37,13 @@ public class AcessarSiteEmBreveStep {
     }
     @Then("ele é encaminhado para o site!\"")
     public void OficialSite() throws Exception {
-        leftMenu.takeSnapShot();
+        leftMenu.TakeSnapShot();
         System.out.println("O site Carregou");
     }
+
+    @After
+    public void End() {
+        mainPage.Finalizar();
+    }
+
 }

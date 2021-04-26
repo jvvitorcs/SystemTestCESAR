@@ -3,7 +3,6 @@ package system.stepDefinitions;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
-import system.helpers.DriverManager;
 import system.pages.MainPage;
 import system.pages.MarketPage;
 import system.pages.TopMenu;
@@ -30,8 +29,9 @@ public class ComprarItemMercadoStep {
         marketPage.BuyClick();
     }
     @Then("o site pede que o usuário inicie a sessão ou crie uma conta!\"")
-    public void CheckStartSession() {
+    public void CheckStartSession() throws Exception {
         marketPage.CheckStartSession();
+        marketPage.takeSnapShot();
     }
 
     @After

@@ -5,7 +5,7 @@ Feature: Entrar no site de um dos jogos listado no "Em Breve"
   Como usuário do aplicativo
   Quando eu entrar na opção "Em breve"
   Quero selecionar algum jogo do slider horizontal
-  Dentro da página no jogo, quero clicar no botão do site oficial
+  Dentro da página do jogo, quero clicar no botão do site oficial
   Para que eu possa ser direcionado para o site
 
   @automated @AcessarSite

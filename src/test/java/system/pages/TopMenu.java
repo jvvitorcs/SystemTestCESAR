@@ -10,21 +10,25 @@ import system.helpers.DriverManager;
 
 public class TopMenu {
 
-    private By containerMenu = By.cssSelector(".supernav_container");
-    private By communityButton = By.cssSelector(".supernav_container > a:nth-child(3)");
-    private By communitySubmenu = By.cssSelector(".supernav_container .supernav_content");
-    private By marketButton = By.cssSelector(".supernav_container .supernav_content a:nth-child(4)");
-
-    /*
-     Representação
-     */
-
     private WebDriver driver;
     private WebDriverWait wait;
+
+    //notUsed
+    private By containerMenu = By.cssSelector(".supernav_container");
+    private By communitySubmenu = By.cssSelector(".supernav_container .supernav_content");
+
+    //Top Menu
+    private By communityButton = By.cssSelector(".supernav_container > a:nth-child(3)");
+    private By marketButton = By.cssSelector(".supernav_container .supernav_content a:nth-child(4)");
 
     public TopMenu(){
         this.driver = DriverManager.getDriver();
         this.wait = DriverManager.getDriverWait();
+    }
+
+    public void CommunityButtonClick(){
+        WebElement CommunityButton = wait.until(ExpectedConditions.elementToBeClickable(communityButton));
+        CommunityButton.click();
     }
 
     public void MarketButtonClick(){
@@ -34,8 +38,4 @@ public class TopMenu {
         WebElement MarketButton = wait.until(ExpectedConditions.elementToBeClickable(marketButton));
         MarketButton.click();
     }
-
-
-
-
 }

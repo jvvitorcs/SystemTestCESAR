@@ -19,23 +19,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LeftMenu {
 
-     /*
-     Representação
-     */
-
     private WebDriver driver;
     private WebDriverWait wait;
 
-    //LeftMenu
+    //notUsed
     private By homePageGutter = By.cssSelector(".home_page_gutter");
-    private By buttonSoon = By.cssSelector(".home_page_gutter  div:nth-child(8) > a:nth-child(3)");
     private By bucketList = By.cssSelector(".bucket.popularwishlist");
     private By slider = By.cssSelector(".store_horizontal_autoslider_ctn");
-    private By sliderItemButton = By.cssSelector(".store_horizontal_autoslider_ctn a");
     private By gameDetails = By.cssSelector(".block.responsive_apppage_details_left.game_details");
-    private By siteButton = By.cssSelector(".block.responsive_apppage_details_left.game_details div:nth-child(2) a:nth-child(2)");
     private By warningPanel = By.cssSelector(".warningPanel.friendlyInterstital");
     private By warningPanelText = By.cssSelector(".warningPanel.friendlyInterstital h2");
+
+
+    //Left Menu
+    private By buttonSoon = By.cssSelector(".home_page_gutter  div:nth-child(8) > a:nth-child(3)");
+    private By sliderItemButton = By.cssSelector(".store_horizontal_autoslider_ctn a");
+    private By siteButton = By.cssSelector(".block.responsive_apppage_details_left.game_details div:nth-child(2) a:nth-child(2)");
     private By proceedButton = By.cssSelector("#proceedButton");
 
     public LeftMenu() {
@@ -68,24 +67,19 @@ public class LeftMenu {
                 driver.switchTo().window(childwindow);
                 WebElement WarningPanelText = driver.findElement(By.cssSelector(".warningPanel.friendlyInterstital h2"));
                 assertEquals("Você está saindo de um site do Steam.", WarningPanelText.getText(), "OK!");
-
             }
         }
     }
-
 
     public void ClickButtonContinue() {
         WebElement ProceedButton =  wait.until(ExpectedConditions.elementToBeClickable(proceedButton));
         ProceedButton.click();
     }
 
-    public void takeSnapShot() throws Exception{
+    public void TakeSnapShot() throws Exception{
 
         TakesScreenshot scrShot =((TakesScreenshot)driver);
         File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(SrcFile, new File("c:\\tmp\\screenshot.png"));
-
+        FileUtils.copyFile(SrcFile, new File("c:\\tmp\\SiteSoon.png"));
     }
-
 }
-
